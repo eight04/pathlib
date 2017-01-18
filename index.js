@@ -87,6 +87,10 @@ class Path {
 		p = unwrap(p);
 		return new Path(path.join(path.dirname(this.path), p, path.basename(this.path)));
 	}
+	moveTo(p) {
+		p = unwrap(p);
+		return new Path(path.join(p, path.basename(this.path)));
+	}
 }
 
 function createPath(p) {
@@ -111,5 +115,9 @@ function unwrap(arg) {
 
 createPath.unwrap = unwrap;
 createPath.Path = Path;
+
+Object.keys(path).forEach(key => {
+	createPath[key] = path[key];
+});
 
 module.exports = createPath;

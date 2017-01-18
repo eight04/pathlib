@@ -2,8 +2,7 @@ var {describe, it} = require("mocha"),
 	{assert} = require("chai"),
 	sinon = require("sinon"),
 
-	path = require("../index"),
-	nodePath = require("path");
+	path = require("../index");
 
 describe("pathlib", () => {
 
@@ -24,24 +23,24 @@ describe("pathlib", () => {
 	it("rename", () => {
 		assert.equal(
 			path("path/to/file.ext").rename({ext: ".ext2"}).normalize().path,
-			nodePath.normalize("path/to/file.ext2")
+			path.normalize("path/to/file.ext2")
 		);
 		assert.equal(
 			path("path/to/file.ext").rename({name: "file2"}).normalize().path,
-			nodePath.normalize("path/to/file2.ext")
+			path.normalize("path/to/file2.ext")
 		);
 		assert.equal(
 			path("path/to/file.ext").rename({base: "another.file"}).normalize().path,
-			nodePath.normalize("path/to/another.file")
+			path.normalize("path/to/another.file")
 		);
 		assert.equal(
 			path("path/to/file.ext").rename({dir: "another/path"}).normalize().path,
-			nodePath.normalize("another/path/file.ext")
+			path.normalize("another/path/file.ext")
 		);
 		if (process.platform == "win32") {
 			assert.equal(
 				path("path/to/file.ext").rename({root: "D:"}).normalize().path,
-				nodePath.normalize("D:\\path\\to\\file.ext")
+				path.normalize("D:\\path\\to\\file.ext")
 			);
 		}
 		
@@ -59,7 +58,7 @@ describe("pathlib", () => {
 			path("path/to/file.ext").rename(
 				({ext}) => ({ext: ".min" + ext})
 			).normalize().path,
-			nodePath.normalize("path/to/file.min.ext")
+			path.normalize("path/to/file.min.ext")
 		);
 	});
 
@@ -71,14 +70,14 @@ describe("pathlib", () => {
 	it("mount", () => {
 		assert.equal(
 			path("path").mount("some/where").path,
-			nodePath.normalize("some/where/path")
+			path.normalize("some/where/path")
 		);
 	});
 
 	it("extend", () => {
 		assert.equal(
 			path("path").extend("some/where").path,
-			nodePath.normalize("path/some/where")
+			path.normalize("path/some/where")
 		);
 	});
 
@@ -92,46 +91,46 @@ describe("pathlib", () => {
 	it("parse", () => {
 		assert.deepEqual(
 			path("path/to/file.txt").parse(),
-			nodePath.parse("path/to/file.txt")
+			path.parse("path/to/file.txt")
 		);
 	});
 
 	it("from", () => {
 		assert.equal(
 			path("path/to/file.txt").from("path").path,
-			nodePath.normalize("to/file.txt")
+			path.normalize("to/file.txt")
 		);
 	});
 
 	it("to", () => {
 		assert.equal(
 			path("path/to/file.txt").to("path").path,
-			nodePath.normalize("../..")
+			path.normalize("../..")
 		);
 	});
 
 	it("resolve", () => {
 		assert.equal(
 			path("a").resolve("b").path,
-			nodePath.resolve("a", "b")
+			path.resolve("a", "b")
 		);
 	});
 
 	it("resolveFrom", () => {
 		assert.equal(
 			path("a").resolveFrom("b").path,
-			nodePath.resolve("b", "a")
+			path.resolve("b", "a")
 		);
 	});
 
 	it("nav", () => {
 		assert.equal(
 			path("path/to/file").nav("another").path,
-			nodePath.normalize("path/to/another")
+			path.normalize("path/to/another")
 		);
 		assert.equal(
 			path("path/to/file/").nav("another").path,
-			nodePath.normalize("path/to/file/another")
+			path.normalize("path/to/file/another")
 		);
 	});
 
@@ -150,8 +149,15 @@ describe("pathlib", () => {
 	it("move", () => {
 		assert.equal(
 			path("path/to/file.ext").move("../hello").path,
-			nodePath.normalize("path/hello/file.ext")
+			path.normalize("path/hello/file.ext")
 		);
 	});
-
+	
+	it("moveTo", () => {
+		assert.equal(
+			path("path/to/file.ext").moveTo("some/where/else").path,
+			path.normalize("some/where/else/file.ext")
+		);
+	});
+	
 });
