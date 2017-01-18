@@ -30,6 +30,9 @@ path("path/to/file.ext").dir().path // "path/to"
 
 // url join
 path("path/to/file").nav("other/").nav("file").path // "path/to/other/file"
+
+// members of original path module are copied.
+path.join("a", "b", "c"); // "a/b/c"
 ```
 
 API reference
@@ -130,10 +133,23 @@ Trim trailing slash.
 
 #### Path.move(path: string|Path): new Path
 
-Util method to move file to other folder.
+Util method to move file along the path to other folder.
+
+#### Path.moveTo(path: string|Path): new Path
+
+Util method to move file to other path. It works a slightly different than `.move`.
+```
+path("a/b/c.dat").move("d").path;   // "a/b/d/c.dat"
+path("a/b/c.dat").moveTo("d").path; // "d/c.dat"
+```
 
 Changelog
 ---------
+
+* 0.1.1 (Jan 18, 2017)
+
+	- Copy original path properties into createPath function.
+	- Add Path.moveTo.
 
 * 0.1.0 (Jan 18, 2017)
 
