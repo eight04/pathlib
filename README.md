@@ -135,6 +135,6 @@ Util method to move file to other folder.
 Changelog
 ---------
 
-* Next
+* 0.1.0 (Jan 18, 2017)
 
     - First release.
