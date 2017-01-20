@@ -75,7 +75,7 @@ class Path {
 		return new Path(path.join(path.dirname(this.path), p));
 	}
 	trim() {
-		if (path.parse(this.path).base && /[\\/]$/.test(this.path)) {
+		if (!this.isRoot() && /[\\/]$/.test(this.path)) {
 			return new Path(this.path.slice(0, -1));
 		}
 		return new Path(this.path);
@@ -90,6 +90,9 @@ class Path {
 	moveTo(p) {
 		p = unwrap(p);
 		return new Path(path.join(p, path.basename(this.path)));
+	}
+	isRoot() {
+		return path.parse(this.path).base == "";
 	}
 }
 

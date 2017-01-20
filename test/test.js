@@ -160,4 +160,11 @@ describe("pathlib", () => {
 		);
 	});
 	
+	it("isRoot", () => {
+		assert.isTrue(path("/").isRoot());
+		assert.isTrue(path("C:").isRoot());
+		assert.isTrue(path("C:/").isRoot());
+		assert.isFalse(path("C/").isRoot());
+	});
+	
 });
