@@ -143,8 +143,16 @@ path("a/b/c.dat").move("d").path;   // "a/b/d/c.dat"
 path("a/b/c.dat").moveTo("d").path; // "d/c.dat"
 ```
 
+#### Path.isRoot(): boolean
+
+Return true if current path is a root path.
+
 Changelog
 ---------
+
+* 0.1.2 (Jan 21, 2017)
+
+	- Add Path.isRoot.
 
 * 0.1.1 (Jan 18, 2017)
 
